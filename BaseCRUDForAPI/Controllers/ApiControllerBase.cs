@@ -52,14 +52,14 @@ namespace BaseCRUDForAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public virtual async Task<ActionResult> Update(int id, [FromBody] TRequest request)
+        public virtual async Task<IActionResult> Update(int id, [FromBody] TRequest request)
         {
             await _baseService.UpdateAsync(id, request);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task<ActionResult> Delete(int id)
+        public virtual async Task<IActionResult> Delete(int id)
         {
             await _baseService.DeleteAsync(id);
             return NoContent();
