@@ -4,9 +4,11 @@ using BaseCRUDForAPI.Core.Interfaces.ServicesInterfaces.Base;
 using BaseCRUDForAPI.Core.Models.Entities.Base;
 using BaseCRUDForAPI.Core.Models.Reponse.Base;
 using BaseCRUDForAPI.Core.Models.Request.Base;
+using MethodTimer;
 
 namespace BaseCRUDForAPI.Infrastructure.Services.Base
 {
+    [Time]
     public class BaseService<TEntity, TRequest, TReponse, TSearch> : IBaseService<TEntity, TRequest, TReponse, TSearch> 
         where TEntity : BaseEntity, new()
         where TRequest : BaseRequest

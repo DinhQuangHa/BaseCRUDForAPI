@@ -1,11 +1,13 @@
 ﻿using BaseCRUDForAPI.Core.Interfaces.RepositoryInterfaces.Base;
 using BaseCRUDForAPI.Core.Models.Entities.Base;
 using BaseCRUDForAPI.Infrastructure.DbContext;
+using MethodTimer;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace BaseCRUDForAPI.Infrastructure.Repositories.Base
 {
+    [Time]
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         protected readonly AppDbContext _dbContext;

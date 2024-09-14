@@ -3,11 +3,13 @@ using BaseCRUDForAPI.Core.Interfaces.ServicesInterfaces.Base;
 using BaseCRUDForAPI.Core.Models.Entities.Base;
 using BaseCRUDForAPI.Core.Models.Reponse.Base;
 using BaseCRUDForAPI.Core.Models.Request.Base;
+using MethodTimer;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 
 namespace BaseCRUDForAPI.Controllers
 {
+    [Time]
     [Produces(MediaTypeNames.Application.Json)]
     [ApiConventionType(typeof(DefaultApiConventions))]
     public abstract class ApiControllerBase<TEntity, TRequest, TReponse, TSearch> : ControllerBase
@@ -29,7 +31,7 @@ namespace BaseCRUDForAPI.Controllers
             var reponse = await _baseService.GetAsync(id);
             return Ok(reponse);
         }
-        
+
         [HttpGet]
         public virtual async Task<ActionResult<TReponse>> GetAll()
         {
