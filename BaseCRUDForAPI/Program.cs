@@ -1,8 +1,11 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using BaseCRUDForAPI.Core.Interfaces.RepositoryInterfaces;
 using BaseCRUDForAPI.Core.Interfaces.RepositoryInterfaces.Base;
 using BaseCRUDForAPI.Core.Interfaces.ServicesInterfaces;
 using BaseCRUDForAPI.Core.Interfaces.ServicesInterfaces.Base;
 using BaseCRUDForAPI.Infrastructure;
+using BaseCRUDForAPI.Infrastructure.AutoFac;
 using BaseCRUDForAPI.Infrastructure.DbContext;
 using BaseCRUDForAPI.Infrastructure.Repositories;
 using BaseCRUDForAPI.Infrastructure.Repositories.Base;
@@ -12,6 +15,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureContainer<ContainerBuilder>(builder =>
+            {
+                builder.RegisterModule(new AutofacModuleRegister());
+            });
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
